@@ -1,0 +1,19 @@
+{
+  "name": "boot",
+  "version": "1.0.0",
+  "description": "Projeto Open Source para criação automática de vídeos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oguinter/automatic-video.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oguinter/automatic-video/issues"
+  },
+  "homepage": "https://github.com/Oguinter/automatic-video#readme"
+}
