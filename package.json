@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Oguinter/automatic-video/issues"
   },
-  "homepage": "https://github.com/Oguinter/automatic-video#readme"
+  "homepage": "https://github.com/Oguinter/automatic-video#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
