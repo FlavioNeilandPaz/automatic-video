@@ -5,18 +5,24 @@ const sentenceBoundaryDetection = require('sbd')
 const watsonApiKey = require ('../credentials/watson-nlu.json').apikey
 const NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
  
-var nlu = new NaturalLanguageUnderstandingV1({
+const nlu = new NaturalLanguageUnderstandingV1({
   iam_apikey: watsonApiKey,
   version: '2018-04-05',
   url: 'https://gateway.watsonplatform.net/natural-language-understanding/api/'
-});
+})
 
-async function robot(content) {
+const state = require('./state.js')//IMPORTA ROBÔ DE ESTADO
+
+async function robot() {
+    const content = state.load() //CARREGOU O ESTADO
+
     await fetchContentFromWikipedia(content) //baixar conteúdo
     sanitizeContent(content) //limpar o conteúdo
     breakContentIntoSentences(content) //quebrar em sentenças
     limitMaximumSentences(content)
     await fetchKeywordsOfAllSentences(content) //nova função asyncrona
+
+    state.save(content)// SALVA INFORMAÇÕES INSERIDAS DENTRO DO CONTENT
 
   async function fetchContentFromWikipedia(content){
     const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey) //API Temporaria (nada ver) vai retornar uma instância autenticada
@@ -44,7 +50,7 @@ async function robot(content) {
               return true
           })
 
-          return withoutBlankLinesAndMarkdown.join('')
+          return withoutBlankLinesAndMarkdown.join(' ')
       }
       
     }
